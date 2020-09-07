@@ -1,0 +1,31 @@
+version: '3'
+
+dotenv: ['.env']
+
+
+vars:
+  PG_CONNECTION_STRING: postgres://$PG_USER:$PG_PASSWORD@$PG_HOST:$PG_PORT/$PG_DATABASE?sslmode=$PG_SSLMODE
+
+tasks:
+  migration:
+    cmds:
+      - task: migration-drop
+      - task: migration-up
+
+  migration-up:
+    cmds:
+      - echo $PG_USER
+      - migrate -source file://migration -database {{.PG_CONNECTION_STRING}} up
+
+  migration-drop:
+    cmds:
+      - echo $PG_USER
+      - migrate -source file://migration -database {{.PG_CONNECTION_STRING}} drop
+
+  migration-create:
+    cmds:
+      - migrate create -dir migration -ext "sql" {{.NAME}}
+
+  gql-generate:
+    cmds:
+      - go run github.com/99designs/gqlgen generate

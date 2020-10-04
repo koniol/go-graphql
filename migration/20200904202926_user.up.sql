@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS users (
                                      id SERIAL PRIMARY KEY,
-                                     email VARCHAR(255),
+                                     email VARCHAR(255) UNIQUE,
                                      password text not null,
                                      created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
                                      updated_at TIMESTAMP WITH TIME ZONE,

@@ -2,6 +2,19 @@
 
 package model
 
+import (
+	"graphqltest/models"
+)
+
+type Auth struct {
+	User  *models.User `json:"user"`
+	Token string       `json:"token"`
+}
+
+type GetUser struct {
+	ID string `json:"id"`
+}
+
 type NewUser struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`

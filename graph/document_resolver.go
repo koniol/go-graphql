@@ -15,6 +15,6 @@ func (d documentResolver) Description(ctx context.Context, obj *models.Document)
 	panic("implement me")
 }
 
-func (r *graph.Resolver) Document() generated.DocumentResolver { return &documentResolver{r} }
+func (r *Resolver) Document() generated.DocumentResolver { return &documentResolver{r} }
 
-type documentResolver struct{ *graph.Resolver }
+type documentResolver struct{ *Resolver }

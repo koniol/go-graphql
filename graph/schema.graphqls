@@ -24,7 +24,8 @@ type Document {
 
 type Query {
   users: [User!]!
-  getUserById(input: ID!): User
+  getUserById(input: GetUser!): User!
+  validateToken(input: String!): Boolean!
   documents: [Document!]!
 }
 
@@ -33,8 +34,17 @@ input NewUser {
   password: String!
 }
 
+input GetUser {
+  id: ID!
+}
+
+type Auth {
+  user: User!
+  token: String!
+}
+
 type Mutation {
-  createUser(input: NewUser!): User!
+  createUser(input: NewUser!): Auth!
   deleteUser(input: Int!): Boolean!
   updateUser(input: NewUser): User!
 }

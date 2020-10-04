@@ -3,6 +3,7 @@ package graph
 import (
 	"context"
 	"graphqltest/graph/generated"
+	"graphqltest/graph/model"
 	"graphqltest/models"
 )
 
@@ -10,10 +11,10 @@ func (r *userResolver) Documents(ctx context.Context, obj *models.User) ([]*mode
 	return r.UserRepo.GetDocumentsByUserId(obj.ID)
 }
 
-func (r *resolvers.queryResolver) GetUserByID(ctx context.Context, input string) (*models.User, error) {
+func (r *queryResolver) GetUserByID(ctx context.Context, input model.GetUser) (*models.User, error) {
 	return r.UserRepo.GetUserByID(input)
 }
 
-func (r *graph.Resolver) User() generated.UserResolver { return &userResolver{r} }
+func (r *Resolver) User() generated.UserResolver { return &userResolver{r} }
 
-type userResolver struct{ *graph.Resolver }
+type userResolver struct{ *Resolver }

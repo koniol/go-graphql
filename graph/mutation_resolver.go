@@ -1,4 +1,4 @@
-package graph
+package resolvers
 
 import (
 	"context"
@@ -20,8 +20,8 @@ func (r *mutationResolver) UpdateUser(ctx context.Context, input *model.NewUser)
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
+func (r *graph.Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
 
 type mutationResolver struct {
-	*Resolver
+	*graph.Resolver
 }

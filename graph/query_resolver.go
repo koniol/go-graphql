@@ -14,6 +14,6 @@ func (r *queryResolver) Users(ctx context.Context) ([]*models.User, error) {
 	return r.UserRepo.GetUsers()
 }
 
-func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
+func (r *graph.Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
-type queryResolver struct{ *Resolver }
+type queryResolver struct{ *graph.Resolver }

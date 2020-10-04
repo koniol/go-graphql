@@ -10,10 +10,10 @@ func (r *userResolver) Documents(ctx context.Context, obj *models.User) ([]*mode
 	return r.UserRepo.GetDocumentsByUserId(obj.ID)
 }
 
-func (r *queryResolver) GetUserByID(ctx context.Context, input string) (*models.User, error) {
+func (r *resolvers.queryResolver) GetUserByID(ctx context.Context, input string) (*models.User, error) {
 	return r.UserRepo.GetUserByID(input)
 }
 
-func (r *Resolver) User() generated.UserResolver { return &userResolver{r} }
+func (r *graph.Resolver) User() generated.UserResolver { return &userResolver{r} }
 
-type userResolver struct{ *Resolver }
+type userResolver struct{ *graph.Resolver }

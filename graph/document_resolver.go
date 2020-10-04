@@ -6,18 +6,15 @@ import (
 	"graphqltest/models"
 )
 
-//func (r *documentResolver) Description(ctx context.Context, obj *models.Document) (string, error) {
-//	panic(fmt.Errorf("not implemented"))
-//}
-//
 func (r *documentResolver) User(ctx context.Context, obj *models.Document) (*models.User, error) {
-	return r.DocumentRepo.GetUsersByDocumentUser(obj.UserId)
+
+	return GetUserLoader(ctx).Load(obj.UserId)
 }
 
 func (d documentResolver) Description(ctx context.Context, obj *models.Document) (string, error) {
 	panic("implement me")
 }
 
-func (r *Resolver) Document() generated.DocumentResolver { return &documentResolver{r} }
+func (r *graph.Resolver) Document() generated.DocumentResolver { return &documentResolver{r} }
 
-type documentResolver struct{ *Resolver }
+type documentResolver struct{ *graph.Resolver }
